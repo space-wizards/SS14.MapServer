@@ -65,7 +65,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=latest
-            type=raw,value=${{steps.get-version.outputs.version}}
+            type=semver,pattern={{version}},value=${{steps.get-version.outputs.version}}
+            type=semver,pattern={{major}}.{{minor}},value=${{steps.get-version.outputs.version}}
+            type=semver,pattern={{major}},value=${{steps.get-version.outputs.version}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.1.1
