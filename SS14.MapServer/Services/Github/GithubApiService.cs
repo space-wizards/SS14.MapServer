@@ -1,4 +1,5 @@
 ﻿using Octokit;
+using SS14.GithubApiHelper.Exceptions;
 using SS14.GithubApiHelper.Services;
 using SS14.MapServer.Configuration;
 using SS14.MapServer.Exceptions;
