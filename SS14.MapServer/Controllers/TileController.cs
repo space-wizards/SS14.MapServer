@@ -45,7 +45,12 @@ public class TileController : ControllerBase
         if (!grid.Tiled)
             return new BadRequestObjectResult(new ApiErrorMessage($"Grid image with id {gridId} doesn't support image tiling"));
 
-        var tile = await _context.Tile!.FindAsync(id, gridId, x, y);
+        var tile = await _context.Tile!.SingleOrDefaultAsync(
+            t => t.MapGuid == id
+                 && t.GridId == gridId
+                 && t.X == x
+                 && t.Y == y
+        );
 
         if (tile == null || !System.IO.File.Exists(tile.Path))
             return new OkResult();
@@ -69,7 +74,7 @@ public class TileController : ControllerBase
         if (map == null)
             return (null, null);
 
-        var grid = map.Grids.Find(value => value.GridId.Equals(gridId));
+        var grid = map.Grids.SingleOrDefault(value => value.GridId.Equals(gridId));
         return (map, grid);
     }
 

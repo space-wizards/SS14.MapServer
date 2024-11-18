@@ -63,7 +63,7 @@ public class ImageController : ControllerBase
         if (_fileUploadService.ValidateImageFile(file, out var message))
             return new BadRequestObjectResult(new ApiErrorMessage(message));
 
-        var image = await _context.Image!.FindAsync(path);
+        var image = await _context.Image!.SingleOrDefaultAsync( img => img.Path ==  path);
 
         if (image == null)
         {
@@ -88,7 +88,7 @@ public class ImageController : ControllerBase
     [ProducesResponseType(200, Type = typeof(FileStreamResult))]
     public async Task<IActionResult> GetImage(string path)
     {
-        var image = await _context.Image!.FindAsync(path);
+        var image = await _context.Image!.SingleOrDefaultAsync(img => img.Path == path);
 
         if (image == null)
             return new NotFoundResult();
@@ -138,13 +138,10 @@ public class ImageController : ControllerBase
         if (CheckETags(hash, out var result))
             return result;
 
-        var grid = map.Grids.Find(value => value.GridId.Equals(gridId));
+        var grid = map.Grids.SingleOrDefault(value => value.GridId.Equals(gridId));
         if (grid == null)
             return new NotFoundResult();
-
-        //if (grid.Tiled)
-        //    return new BadRequestObjectResult(new ApiErrorMessage($"Grid image with id {gridId} is a tiled image"));
-
+        
         if (!System.IO.File.Exists(grid.Path))
             return new NotFoundResult();
 
