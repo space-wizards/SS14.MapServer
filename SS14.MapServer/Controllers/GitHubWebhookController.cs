@@ -99,7 +99,7 @@ public class GitHubWebhookController : ControllerBase
         if (files.Count == 0)
             return;
 
-        // Ensure the the ref will always just be the branch name
+        // Ensure the ref will always just be the branch name
         var bareRef = Path.GetFileName(headCommit.Ref);
 
         // Prevent PRs from the master branch causing issues

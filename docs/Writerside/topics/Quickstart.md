@@ -4,9 +4,9 @@
 It also takes care of managing and hosting map images.
 
 It's mainly used in combination with the map viewer, which lists and displays maps from a specific branch:
-[https://github.com/juliangiebel/space-station-14-map-viewer](https://github.com/juliangiebel/space-station-14-map-viewer)
+[https://github.com/space-wizards/ss14.mapviewer](https://github.com/space-wizards/ss14.mapviewer)
 
-The map viewer for Official SS14 servers can be found here: [https://maps14.tanukij.dev/](https://maps14.tanukij.dev/)
+The map viewer for Official SS14 servers can be found here: [https://map.spacestation14.com/](https://map.spacestation14.com/)
 
 The map server can also post map images on PRs that modify map files. That requires setting up a Github app.
 
@@ -38,7 +38,7 @@ If you want automatic rendering and map images under PRs changing map files you'
 ## Setup - Docker compose
 
 There is a docker image provided for %project-name%:  
-[https://github.com/juliangiebel/SS14.MapServer/pkgs/container/ss14.mapserver](https://github.com/juliangiebel/SS14.MapServer/pkgs/container/ss14.mapserver)
+[https://github.com/space-wizards/SS14.MapServer/pkgs/container/ss14.mapserver](https://github.com/space-wizards/SS14.MapServer/pkgs/container/ss14.mapserver)
 
 ````yaml
 # Example docker compose file
@@ -47,7 +47,7 @@ services:
   # The ss14 map server container doesn't support https on its own. 
   # Please use a reverse proxy
   ss14mapserver:
-    image: ghcr.io/juliangiebel/ss14.mapserver:latest
+    image: ghcr.io/space-wizards/ss14.mapserver:latest
     volumes:
       - ./appsettings.yaml:/app/appsettings.yaml
       - ./private-key.pem:/app/private-key.pem

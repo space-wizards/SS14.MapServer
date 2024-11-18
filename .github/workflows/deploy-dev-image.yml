@@ -27,9 +27,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --no-restore -c Release -p:SentryOrg=sentry -p:SentryProject=ss14-map-server -p:SentryUploadSymbols=true -p:SentryUploadSources=true -p:SentryUrl=https://bugs.tanukij.dev
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        #run: dotnet build --no-restore -c Release -p:SentryOrg=sentry -p:SentryProject=ss14-map-server -p:SentryUploadSymbols=true -p:SentryUploadSources=true -p:SentryUrl=https://bugs.tanukij.dev
+        run: dotnet build --no-restore -c Release -p:SentryOrg=sentry -p:SentryProject=ss14-map-server
+        #env:
+        #  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
   deploy-container:
     runs-on: ubuntu-latest
