@@ -186,11 +186,11 @@ public class GitHubWebhookController : ControllerBase
 
     private async Task CreateInitialPrComment(PullRequestEventPayload payload, GitReference baseCommit, List<string?> files)
     {
-        // ReSharper disable once MethodHasAsyncOverload
-        var prComment = _context.PullRequestComment?.Find(
-            baseCommit.User.Login,
-            baseCommit.Repository.Name,
-            payload.PullRequest.Number);
+        var prComment = await _context.PullRequestComment.Where(pr =>
+            pr.Owner == baseCommit.User.Login
+            && pr.Repository == baseCommit.Repository.Name
+            && pr.IssueNumber == payload.PullRequest.Number
+        ).SingleOrDefaultAsync();
 
         if (prComment != null)
             return;
@@ -250,10 +250,11 @@ public class GitHubWebhookController : ControllerBase
         }
 
         // ReSharper disable once MethodHasAsyncOverload
-        var prComment = _context.PullRequestComment?.Find(
-            pullRequest.Base.User.Login,
-            pullRequest.Base.Repository.Name,
-            pullRequest.Number);
+        var prComment = await _context.PullRequestComment.Where(pr =>
+            pr.Owner == pullRequest.Base.User.Login
+            && pr.Repository == pullRequest.Base.Repository.Name
+            && pr.IssueNumber == pullRequest.Number
+        ).SingleOrDefaultAsync();
 
         var issue = new IssueIdentifier(
             pullRequest.Base.User.Login,
@@ -281,7 +282,7 @@ public class GitHubWebhookController : ControllerBase
         }
     }
 
-    private void SavePrComment(int? commentId, IssueIdentifier issue)
+    private void SavePrComment(long? commentId, IssueIdentifier issue)
     {
         if (!commentId.HasValue)
             return;

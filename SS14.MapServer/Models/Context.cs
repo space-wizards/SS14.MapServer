@@ -5,12 +5,12 @@ namespace SS14.MapServer.Models;
 
 public class Context : DbContext
 {
-    public DbSet<Map>? Map { get; set; }
-    public DbSet<Tile>? Tile { get; set; }
-    public DbSet<ImageFile>? Image { get; set; }
-    public DbSet<Grid>? Grid { get; set; }
+    public DbSet<Map> Map { get; set; } = null!;
+    public DbSet<Tile> Tile { get; set; }  = null!;
+    public DbSet<ImageFile> Image { get; set; }  = null!;
+    public DbSet<Grid> Grid { get; set; }  = null!;
 
-    public DbSet<PullRequestComment>? PullRequestComment { get; set; }
+    public DbSet<PullRequestComment> PullRequestComment { get; set; } = null!;
 
     public Context(DbContextOptions<Context> options) : base(options) {}
 
