@@ -31,7 +31,6 @@ public sealed class StartupMigrationHelper
         if(diffsExist)
             throw new InvalidOperationException("There are differences between the current database model and the most recent migration.");
 
-        ctx.Database.EnsureCreated();
         ctx.Database.Migrate();
     }
 }
