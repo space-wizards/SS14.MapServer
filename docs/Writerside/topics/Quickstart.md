@@ -37,14 +37,14 @@ If you want automatic rendering and map images under PRs changing map files you'
 
 ## Setup - Docker compose
 
-There is a docker image provided for %project-name%:  
+There is a docker image provided for %project-name%:
 [https://github.com/space-wizards/SS14.MapServer/pkgs/container/ss14.mapserver](https://github.com/space-wizards/SS14.MapServer/pkgs/container/ss14.mapserver)
 
 ````yaml
 # Example docker compose file
 version: '3.3'
 services:
-  # The ss14 map server container doesn't support https on its own. 
+  # The ss14 map server container doesn't support https on its own.
   # Please use a reverse proxy
   ss14mapserver:
     image: ghcr.io/space-wizards/ss14.mapserver:latest
@@ -68,13 +68,12 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 ````
 {collapsible="true"}
 
 ## Setup - Manual
 
-> Don't set %project-name% up without docker while using local mode and having automated builds enabled.  
+> Don't set %project-name% up without docker while using local mode and having automated builds enabled.
 > You run the risk of malicious code making its way into the content repo and being executed on the host machine.
 {style="warning"}
 
