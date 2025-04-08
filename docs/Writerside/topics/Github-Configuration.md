@@ -9,6 +9,7 @@ yaml:
   [[[AppPrivateKeyLocation|#appprivatekeylocation]]]: <string>
   [[[AppId|#appid]]]: <int>
   [[[TemplateLocation|#templatelocation]]]: <string>
+  [[[AppWebhookSecret|#appwebhooksecret]]]: <string>
 ````
 
 ## Configuration Options
@@ -37,6 +38,11 @@ The app id of the GitHub app
 `<string>`
 
 The location of liquid templates used for GitHub PR comments.
+
+### AppWebhookSecret
+`<string>`
+
+The webhook secret
 
 <seealso>
     <!--Provide links to related how-to guides, overviews, and tutorials.-->
