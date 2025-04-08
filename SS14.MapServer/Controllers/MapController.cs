@@ -26,7 +26,6 @@ public class MapController : ControllerBase
     private readonly IJobSchedulingService _schedulingService;
 
     private readonly ServerConfiguration _serverConfiguration = new();
-    private readonly BuildConfiguration _buildConfiguration = new();
 
     public MapController(
         Context context,
@@ -47,12 +46,6 @@ public class MapController : ControllerBase
     [Produces("application/json")]
     public async Task<ActionResult<IEnumerable<Map>>> GetMaps()
     {
-        if (!_buildConfiguration.Enabled)
-            return NotFound("Automated building features are disabled");
-
-        if (_context.Map == null)
-            return NotFound();
-
         var maps = await _context.Map.Include(map => map.Grids).ToListAsync();
         maps = maps.Select(SetMapGridUrls).ToList();
         return maps;
