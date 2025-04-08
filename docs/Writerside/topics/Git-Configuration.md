@@ -45,7 +45,7 @@ If this is false all maps will get updated on every push.
 > {style="note"}
 
 ### MapFilePatterns
-`<string[]> default="master"`
+`<string[]> default="Resources/Maps/*.yml"`
 
 Glob patterns of map files to check for.
 
@@ -59,12 +59,12 @@ Glob patterns for excluding specific map files.
 
 Prevent updating maps when there where any c# files changed.
 
-> Requires the map server to be installed as a github app.  
+> Requires the map server to be installed as a github app.
 > This setting is recommended when the map server is configured to run for PRs
 > as it prevents potentially malicious changes from being built and executed.
 > {style="note"}
 
-> Be **very** careful about turning this off as it may allow arbitrary code execution 
+> Be **very** careful about turning this off as it may allow arbitrary code execution
 > if the map server is not configured with this option being turned off in mind!
 > {style="warning"}
 
@@ -81,13 +81,13 @@ Setting this to true enables listening to the PullRequest event for putting the 
 ### Identity
 `<GitIdentity> default={Name="ss14.mapserver", Email="git@mapserver.localhost"}`
 
-The identity git will use to pull changes with. This doesn't have an effect on anything but is required for pulling 
+The identity git will use to pull changes with. This doesn't have an effect on anything but is required for pulling
 changes in some situations.
 
 ### SshCommand
 `<string>`
 
-The ssh command used by git if set. Used for providing an ssh key to use.  
+The ssh command used by git if set. Used for providing an ssh key to use.
 
 ````Shell
 ssh -i [path to ssh key]
