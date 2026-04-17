@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SS14.MapServer.Security;
@@ -14,24 +14,18 @@ public class ExcludeAnonymousSecurityFilter : IOperationFilter
 
         if (allowsAnonymousAccess)
             return;
-        
+
         operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
         operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
 
-        var apiKeyScheme = new OpenApiSecurityScheme
-        {
-            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = ApiKeyHandler.Name }
-        };
+        var apiKeyScheme = new OpenApiSecuritySchemeReference(ApiKeyHandler.Name, context.Document);
 
-        operation.Security = new List<OpenApiSecurityRequirement>
-        {
-            new()
+        operation.Security =
+        [
+            new OpenApiSecurityRequirement
             {
-                [ apiKeyScheme ] = new List<string>
-                {
-                    "API"
-                }
+                [apiKeyScheme] = ["API"]
             }
-        };
+        ];
     }
 }

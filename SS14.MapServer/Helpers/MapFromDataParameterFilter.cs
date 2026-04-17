@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SS14.MapServer.Helpers;
@@ -32,7 +32,7 @@ public class MapFormDataParameterFilter : IOperationFilter
 
         var mapParameter = new OpenApiSchema
         {
-            Type = "string"
+            Type = JsonSchemaType.String
         };
 
         type.Schema.Properties.Clear();
