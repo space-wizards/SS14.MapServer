@@ -12,12 +12,18 @@ public class MapFormDataParameterFilter : IOperationFilter
         if (methodName != "PostMap" && methodName != "PutMap")
             return;
 
+        if (operation.RequestBody?.Content is null)
+            return;
         if(!operation.RequestBody.Content.TryGetValue("multipart/form-data", out var type))
             return;
 
+        if(type.Schema?.Properties is null)
+            return;
         if(!type.Schema.Properties.TryGetValue("images", out var imagesParameter))
             return;
 
+        if (type.Encoding is null)
+            return;
         if(!type.Encoding.TryGetValue("images", out var imageEncoding))
             return;
 
@@ -39,6 +45,6 @@ public class MapFormDataParameterFilter : IOperationFilter
         type.Schema.Properties.Add("images", imagesParameter);
         type.Schema.Properties.Add("map", mapParameter);
 
-        type.Schema.Required.Clear();
+        type.Schema?.Required?.Clear();
     }
 }

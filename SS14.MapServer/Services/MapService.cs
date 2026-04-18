@@ -44,7 +44,7 @@ public sealed class MapService
         {
             File.Delete(path);
         }
-        catch (Exception _)
+        catch (Exception)
         {
             // Best effort deletion
         }
@@ -56,7 +56,7 @@ public sealed class MapService
         {
             Directory.Delete(path, true);
         }
-        catch (Exception _)
+        catch (Exception)
         {
             // Best effort deletion
         }

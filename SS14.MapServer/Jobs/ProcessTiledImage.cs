@@ -23,7 +23,7 @@ public class ProcessTiledImage : IJob
     {
         var dataMap = context.JobDetail.JobDataMap;
 
-        if (dataMap.Get(ProcessOptionsKey) is not ProcessingOptions options)
+        if (dataMap[ProcessOptionsKey] is not ProcessingOptions options)
             throw new JobExecutionException($"Job data value with key ${ProcessOptionsKey} and type ProcessingOptions is missing");
 
         var tiles = await _processingService.TileImage(

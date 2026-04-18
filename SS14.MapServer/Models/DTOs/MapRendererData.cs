@@ -6,12 +6,12 @@ namespace SS14.MapServer.Models.DTOs;
 
 public sealed class MapRendererData
 {
-    public string Id {get; set;}
+    public required string Id {get; set;}
     [Required, JsonProperty("Name")]
-    public string DisplayName {get; set;}
+    public required string DisplayName {get; set;}
     [JsonProperty("Attributions")]
     public string? Attribution {get; set;}
     [Required]
     public List<GridData> Grids {get;} = new();
-    public List<ParallaxLayer> ParallaxLayers {get; set;}
+    public required List<ParallaxLayer> ParallaxLayers {get; set;}
 }

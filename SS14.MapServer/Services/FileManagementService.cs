@@ -60,7 +60,7 @@ public sealed class FileManagementService
                     file.Delete();
                     filesCounter++;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     // Ignore
                 }

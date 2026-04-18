@@ -64,7 +64,7 @@ public class GitHubWebhookController : ControllerBase
 
         var cloneUrl = pushEvent.Repository?.CloneUrl ?? string.Empty;
         if (cloneUrl != string.Empty &&  !_gitConfiguration.RepositoryUrl.Equals(cloneUrl))
-            return new BadRequestObjectResult($"Instance not configured for repository: {pushEvent.Repository.CloneUrl}");
+            return new BadRequestObjectResult($"Instance not configured for repository: {pushEvent.Repository?.CloneUrl}");
 
         switch (eventName)
         {
@@ -319,7 +319,7 @@ public class GitHubWebhookController : ControllerBase
 /// </summary>
 public sealed class PatchedPushEventPayload : PushEventPayload
 {
-    public string Before { get; private set; }
+    public new string Before { get; private set; }
     public string After { get; private set; }
     public new string Ref { get; private set; }
 }
