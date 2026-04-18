@@ -116,7 +116,7 @@ public sealed partial class LocalBuildService
         var log = logBuffer.ToString();
         // Bandaid the fact that the map renderer doesn't return an error code when rendering fails
 
-        if (process.ExitCode != 0 || LogErrorRegex().IsMatch(log))
+        if (process.ExitCode != 0 || RendererFailureRegex().IsMatch(log))
         {
             var exception = new BuildException($"Error while running: {command} {string.Join(' ', arguments)}");
             ProcessLocalBuildException(log, "run.log", exception);
@@ -157,6 +157,6 @@ public sealed partial class LocalBuildService
             });
     }
 
-    [GeneratedRegex("error?|exception|fatal")]
-    private static partial Regex LogErrorRegex();
+    [GeneratedRegex(@"(?im)(\[(ERRO|FATL)\])|(^Unhandled exception\.)|(^\s*System\.[\w.]+Exception\b)", RegexOptions.CultureInvariant)]
+    private static partial Regex RendererFailureRegex();
 }
